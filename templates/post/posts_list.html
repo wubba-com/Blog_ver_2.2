@@ -1,0 +1,6 @@
+{% extends 'post/base.html' %}
+{% block content %}
+{% for post in post_list %}
+    {% include 'include/post_card.html' %}
+{% endfor %}
+{% endblock content %}

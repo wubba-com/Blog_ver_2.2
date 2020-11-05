@@ -1,0 +1,7 @@
+{% extends 'post/base.html' %}
+{% block content %}
+<h1>{{ tags.title }}</h1>
+    {% for post in tags.posts.all %}
+        {% include 'include/post_card.html' %}
+    {% endfor %}
+{% endblock content %}

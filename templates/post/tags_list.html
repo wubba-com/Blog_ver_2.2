@@ -1,0 +1,6 @@
+{% extends 'Blog/base.html' %}
+{% block content %}
+{% for tag in tags_list %}
+<p><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></p>
+{% endfor %}
+{% endblock content %}
