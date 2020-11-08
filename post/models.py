@@ -26,6 +26,12 @@ class Tags(models.Model):
     def get_absolute_url(self):
         return reverse('tag_detail', kwargs={'slug': self.url_tags})
 
+    def get_update_url(self):
+        return reverse('tag_update_url', kwargs={'slug': self.url_tags})
+
+    def get_delete_url(self):
+        return reverse('tag_delete_url', kwargs={'slug': self.url_tags})
+
 
 class Post(models.Model):
     """Посты"""
@@ -45,6 +51,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.url})
+
+    def get_update_url(self):
+        return reverse('post_update_url', kwargs={'slug': self.url})
+
+    def get_delete_url(self):
+        return reverse('post_delete_url', kwargs={'slug': self.url})
 
     def save(self, *args, **kwargs):
         if not self.url:

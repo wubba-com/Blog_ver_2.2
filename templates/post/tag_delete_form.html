@@ -1,0 +1,12 @@
+{% extends 'post/base.html' %}
+{% block title %}
+Удаление тега {{ tag.title }}
+{% endblock title %}
+{% block content %}
+<form action="{{ tag.get_delete_url }}" method="post">
+    {% csrf_token %}
+    <h4>Вы точно хотите удалить тег <strong>{{ tag.title | title }}</strong>?</h4>
+    <button class="btn btn-success text-white"><a class="text-white" href="{{ tag.get_absolute_url }}">Нет</a></button>
+    <button class="btn btn-danger text-white">Удалить</button>
+</form>
+{% endblock content %}
