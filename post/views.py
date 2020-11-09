@@ -5,12 +5,12 @@ from django.urls import reverse
 from .models import Post, Tags
 from .forms import TagForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 
-class BlogView(ListView):
+class PostListView(ListView):
     """Вывод всех статей"""
     model = Post
-    queryset = Post.objects.all()
     template_name = 'post/posts_list.html'
 
 
@@ -140,3 +140,13 @@ class PostDeleteView(LoginRequiredMixin, View):
         post = Post.objects.get(url__iexact=slug)
         post.delete()
         return redirect(reverse('posts'))
+
+
+class Search(ListView):
+
+    template_name = 'post/posts_list.html'
+
+    def get_queryset(self):
+        search_query = self.request.GET.get('search', '')
+        if search_query:
+            return Post.objects.filter(Q(title__icontains=search_query) | Q(body_post__icontains=search_query))
