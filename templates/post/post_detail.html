@@ -3,6 +3,12 @@
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
     <p class="blog-post-meta">{{post.date_publish}}</p>
+    {% if user.is_staff %}
+    <div class="update-or-delete">
+        <a class="dict btn btn-primary" href="{% url 'post_update_url' post.url %}">Изменить</a>
+        <a class="dict btn btn-danger" href="{% url 'post_delete_url' post.url %}">Удалить</a>
+    </div>
+    {% endif %}
     <hr>
     <p>{{ post.body_post }}</p>
     <hr>

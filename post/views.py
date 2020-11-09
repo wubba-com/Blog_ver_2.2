@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from .models import Post, Tags
 from .forms import TagForm, PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class BlogView(ListView):
@@ -33,20 +34,26 @@ class TagDetailView(DetailView):
     slug_field = 'url_tags'
 
 
-class TagCreateView(CreateView):
+class TagCreateView(LoginRequiredMixin, CreateView):
+    """Создание тега"""
     model = Tags
     form_class = TagForm
     template_name = 'post/tag_create.html'
+    raise_exception = True
 
 
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
     """Создание статьи пользователем"""
     model = Post
     form_class = PostForm
     template_name = 'post/post_create_form.html'
+    raise_exception = True
 
 
-class TagUpdateView(View):
+class TagUpdateView(LoginRequiredMixin, View):
+    """Изменение тега"""
+    raise_exception = True
+
     def get(self, request, slug):
         tag = Tags.objects.get(url_tags__iexact=slug)
         bound_form = TagForm(instance=tag)
@@ -70,7 +77,10 @@ class TagUpdateView(View):
             return render(request, 'post/tag_update_form.html', context)
 
 
-class PostUpdateView(View):
+class PostUpdateView(LoginRequiredMixin, View):
+    """Изменение поста"""
+    raise_exception = True
+
     def get(self, request, slug):
         post = Post.objects.get(url__iexact=slug)
         bound_form = PostForm(instance=post)
@@ -94,7 +104,10 @@ class PostUpdateView(View):
             return render(request, 'post/post_update_form.html', context)
 
 
-class TagDeleteView(View):
+class TagDeleteView(LoginRequiredMixin, View):
+    """Удаление тега"""
+    raise_exception = True
+
     def get(self, request, slug):
         tag = Tags.objects.get(url_tags__iexact=slug)
         bound_form = TagForm(instance=tag)
@@ -110,7 +123,10 @@ class TagDeleteView(View):
         return redirect(reverse('tags'))
 
 
-class PostDeleteView(View):
+class PostDeleteView(LoginRequiredMixin, View):
+    """Удаление поста"""
+    raise_exception = True
+
     def get(self, request, slug):
         post = Post.objects.get(url__iexact=slug)
         bound_form = PostForm(instance=post)

@@ -1,0 +1,18 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form class="form-signin" method="post">
+    {% csrf_token %}
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Пожалуйста введите</h1>
+    {{ form|crispy }}
+    <label>
+        <input type="checkbox" value="remember-me"> Запомнить меня
+    </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    <p class="my-3 mb-3"><a href="{% url 'signup' %}">Зарегестрироваться</a></p>
+    <p class="mt-5 mb-10 text-muted">&copy; 2020</p>
+</form>
+
+{% endblock content %}

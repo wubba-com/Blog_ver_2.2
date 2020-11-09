@@ -1,6 +1,12 @@
 {% extends 'post/base.html' %}
 {% block content %}
 {% for tag in tags_list %}
-<p><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4"><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></h1>
+        <p class="lead">Это модифицированный jumbotron, который занимает все горизонтальное пространство своего
+            родителя.</p>
+    </div>
+</div>
 {% endfor %}
 {% endblock content %}

@@ -1,0 +1,12 @@
+body {
+    background-color: #F8F8FF;
+}
+.update-or-delete {
+    position: fixed;
+    right: 400px;
+    bottom: 810px;
+    padding: 10px;
+}
+.dict {
+    padding: 10px;
+}
